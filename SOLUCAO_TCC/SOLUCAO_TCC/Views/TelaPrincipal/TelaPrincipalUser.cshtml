@@ -1,0 +1,258 @@
+﻿@model SOLUCAO_TCC.Models.Viewmodels.SelectViewModel
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body style="background-color: #E0dddd ">
+    <nav class="navbar fixed-top border border-secondary border-3" style="background-color: #2b7ead">
+        <div class="container-md">
+            <a class="navbar-brand">
+                <img src="~/Content/imgfixa/cp2logo.png" alt="Logo" width="200" height="150" class="d-inline-block align-text-top">
+            </a>
+            <div class="nav-item">
+                <div class="p-3 bg-info bg-opacity-10 border border-info rounded-end rounded-start">
+                <p class="h3" style="font-family:fantasy">Procure sua Obra desejada utilizando os Filtros!</p> 
+                <div class="input-group dropdown justify-content-center">
+                    <a role="button" data-bs-toggle="dropdown" class="btn btn-dark dropdown-toggle" aria-expanded="false" href="#">Filtrar</a>
+
+                    <ul class="dropdown-menu" id="filtro">
+                        <li>
+                            <h5 class="ms-2">Filtrar Por:</h5>
+                            <div class="ms-2">
+                                <input onchange="busca()" type="radio" checked name="tipo" id="nome" value="1">
+                                <label for="nome">Nome</label><br />
+                                <input onchange="busca()" type="radio" name="tipo" id="autor" value="2">
+                                <label for="autor">Autor</label><br />
+                                <input onchange="busca()" type="radio" name="tipo" id="genero" value="3">
+                                <label for="genero">Gênero</label><br />
+                                <input onchange="busca()" type="radio" name="tipo" id="tipo" value="4">
+                                <label for="tipo">Tipo</label>
+                            </div>
+                        </li>
+                    </ul>
+
+                    <input type="text" id="search" oninput="busca()" name="search" placeholder="Buscar..." class=" rounded-end border-start border-top border-dark " />
+                </div>
+                </div>
+            </div>
+            <button class="navbar-toggler border border-info bg-opacity-10" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar" style="height: 100px; width: 100px">
+                <span class="navbar-toggler-icon" style="height: 80px; width: 80px"></span>
+            </button>
+            <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
+                <div class="offcanvas-header">
+                    <h5 class="offcanvas-title" id="offcanvasDarkNavbarLabel">Conta de Usuário</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                </div>
+                <div class="offcanvas-body">
+                    <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                        <li class="nav-item d-grid gap-2"><a class="btn btn-success" href="@Url.Action("UserEmprestimos", "Emprestimo")">Visualizar Empréstimos <i class="bi bi-arrows-collapse"></i></a></li>
+                        <li>----------------------------------------------------</li>
+                        <li class="nav-item d-grid gap-2">
+                            @if (Request.IsAuthenticated)
+                            {
+                                using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+                                {
+                                    @Html.AntiForgeryToken()
+                                <li>
+                                    @Html.ActionLink("Gerenciar Conta⚙", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage", @class = " btn btn-primary d-grid gap-2" })
+                                </li>
+                                <li>----------------------------------------------------</li>
+
+                                <li class="nav-item d-grid gap-2">
+                                    <a class="btn btn-danger" href="javascript:document.getElementById('logoutForm').submit()">Fazer Logoff <i class="bi bi-box-arrow-left"></i></a>
+                                </li>
+                            }
+                        }
+                        else
+                        {
+
+                        }
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </body>
+</html>
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<div id="livrao">
+    <div class="container">
+        <div class="row row-cols-2">
+            @for (int i = 0; i < Model.Obra.Count(); i++)
+            {<div class="col">
+                    <div class="card mb-3 border-dark border-2" style="max-width: 509px; max-height: 260px; background-color: #f6d5d8">
+                        <div class="row g-0">
+                            <div class="col-md-4">
+                                <img src="@Model.Obra[i].Imagem" class="img-fluid rounded-start" alt="...">
+                            </div>
+                            <div class="col-md-8">
+                                <div class="card-body">
+                                    <h5 class="card-header fw-bolder">@Model.Obra[i].Nome</h5>
+                                    <p class="card-text">
+                                        <small class="fw-bold">Autor: </small>@Model.Obra[i].Autor<br />
+                                        <small class="fw-bold">Gênero:</small> @Model.Obra[i].Genero<br />
+                                        <small class="fw-bold">Tipo:</small> @Model.Obra[i].Tipo<br />
+                                        <small class="fw-bold">Quantidade Disponivel:</small> @Model.Obra[i].Quantidade<br />
+                                        <small class="fw-bold">Localização na Biblioteca: </small>@Model.Obra[i].Localizacao<br />
+                                    <p class="card-text"><a class="select btn btn-dark" data-id="@Model.Obra[i].Cod_Obra">Visualize as informações da Obra <i class="bi bi-eye-fill"></i></a></p>
+                                    <input type="hidden" value="@Model.Obra[i].Cod_Obra" name="Cod_Obra" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+    <div class="modal fade" id="Modal" tabindex="-1"></div>
+    <div class="modal fade" id="Modal2" tabindex="-1"></div>
+
+    @section scripts {
+        <script>
+                    $(document).ready(function ()
+                    {
+                        $('.select').click(function ()
+                        {
+                            var x = $(this).data("id");
+                            console.log(x);
+                            $.ajax
+                            ({
+                                type: 'GET',
+                                url: '@Url.Action("ObraDetalhe", "Obra")/' + x,
+                                dataType: 'html',
+                                cache: false,
+                                success: function (data)
+                                {
+                                    $('#Modal').html(data);
+                                    $('#Modal').modal("show");
+                                    $('.select2').click(function ()
+                                    {
+                                        $('#Modal').modal("hide");
+                                        var x = $(this).data("id");
+                                        console.log(x);
+                                        $.ajax
+                                        ({
+                                            type: 'GET',
+                                            url: '@Url.Action("CadastrarEmprestimo", "Obra")/' + x,
+                                            dataType: 'html',
+                                            cache: false,
+                                            success: function (data)
+                                            {
+                                                $('#Modal2').html(data);
+                                                $('#Modal2').modal("show");
+                                                
+                                            },
+                                            error: function ()
+                                            {
+                                                console.log("Erro");
+                                            },
+                                            complete: function ()
+                                            {
+                                                $("form").each(function () { $.data($(this)[0], 'validator', false); });
+                                                $.validator.unobtrusive.parse("form");
+                                            }
+                            });
+                        });
+                                },
+                                error: function () {
+                                    console.log("Erro");
+                                },
+                                complete: function () {
+                                    $("form").each(function () { $.data($(this)[0], 'validator', false); });
+                                    $.validator.unobtrusive.parse("form");
+                                }
+                            });
+                        });
+
+
+                    })
+
+                        function busca()
+                        {
+                            var x = $("input[name=tipo]:checked", "#filtro").val();
+                            var texto = $("#search").val();
+
+                            $.ajax
+                            ({
+                                type: 'GET',
+                                url: '@Url.Action("Busca", "Busca")?search=' + texto + "&tipo=" + x,
+                                dataType: 'html',
+                                cache: false,
+                                success: function (data) {
+                                    $('#livrao').html(data);
+                                    $('.select').click(function ()
+                                    {
+                                        var x = $(this).data("id");
+                                        console.log(x);
+                                        $.ajax
+                                        ({
+                                            type: 'GET',
+                                            url: '@Url.Action("ObraDetalhe", "Obra")/' + x,
+                                            dataType: 'html',
+                                            cache: false,
+                                            success: function (data) {
+                                                $('#Modal').html(data);
+                                                $('#Modal').modal("show");
+                                                $('.select2').click(function ()
+                                    {
+                                        $('#Modal').modal("hide");
+                                        var x = $(this).data("id");
+                                        console.log(x);
+                                        $.ajax
+                                        ({
+                                            type: 'GET',
+                                            url: '@Url.Action("CadastrarEmprestimo", "Obra")/' + x,
+                                            dataType: 'html',
+                                            cache: false,
+                                            success: function (data)
+                                            {
+                                                $('#Modal2').html(data);
+                                                $('#Modal2').modal("show");
+                                                
+                                            },
+                                            error: function ()
+                                            {
+                                                console.log("Erro");
+                                            },
+                                            complete: function ()
+                                            {
+                                                $("form").each(function () { $.data($(this)[0], 'validator', false); });
+                                                $.validator.unobtrusive.parse("form");
+                                            }
+                            });
+                        });
+                                            },
+                                            error: function () {
+                                                console.log("Erro");
+                                            },
+                                            complete: function () {
+                                                $("form").each(function () { $.data($(this)[0], 'validator', false); });
+                                                $.validator.unobtrusive.parse("form");
+                                            }
+                                        });
+                                        });
+                                    },
+                                    error: function () {
+                                        console.log("Erro");
+                                }
+                            });
+
+                        }
+
+        </script>
+
+
+        @Scripts.Render("~/bundles/jqueryval")
+    }

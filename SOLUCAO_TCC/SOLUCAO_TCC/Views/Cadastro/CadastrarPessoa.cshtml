@@ -1,0 +1,70 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body style="background-color: #E0dddd ">
+    <nav class="navbar fixed-top border border-secondary border-3" style="background-color: #2b7ead">
+        <div class="container-md">
+            <a class="navbar-brand">
+                <img src="~/Content/imgfixa/cp2logo.png" alt="Logo" width="200" height="150" class="d-inline-block align-text-top">
+            </a>
+            <span class="navbar-text fs-1 p-3 bg-info bg-opacity-10 border border-info rounded-end rounded-start" style="font-family:fantasy">BIBLIOTECA DO COLÉGIO PEDRO II - EN II</span>
+            <button class="navbar-toggler border border-info bg-opacity-10" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar" style="height: 100px; width: 100px">
+                <span class="navbar-toggler-icon" style="height: 80px; width: 80px"></span>
+            </button>
+            <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
+                <div class="offcanvas-header">
+                    <h5 class="offcanvas-title" id="offcanvasDarkNavbarLabel">Você é Aluno ou Funcionário?</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+
+
+
+    <div class="text-center mt-5">
+        <h2>Escolha seu tipo:</h2>
+    </div>
+
+    <div class="row" style="height:70%; padding-top:135px">
+        <div class="col-md-6">
+            <div class="card mb-3" style="max-width: 600px;">
+                <div class="row g-0">
+                    <div class="col-md-5">
+                        <img src="~/Content/imgfixa/aluno.jpg" class="img-fluid rounded-start" style="height:200px; width:300px" alt="...">
+                    </div>
+                    <div class="col-md-7">
+                        <div class="card-body">
+                            <h5 class="card-title fw-bold fs-3" style="font-family: Courier New">Sou Aluno</h5>
+                            <p class="card-text">Ao clicar neste botão, será redirecionado a página de cadastro onde deverá preencher com suas informações pessoais.</p>
+                            <p class="card-text d-grid gap-2"><a class="btn btn-outline-success" href="@Url.Action("CadastrarAluno", "Cadastro")">Ser Aluno</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card mb-3" style="max-width: 600px;">
+                <div class="row g-0">
+                    <div class="col-md-5">
+                        <img src="~/Content/imgfixa/funcionario.jpg" class="img-fluid rounded-start" style="height:200px; width:300px" alt="...">
+                    </div>
+                    <div class="col-md-7">
+                        <div class="card-body">
+                            <h5 class="card-title fw-bold fs-3" style="font-family: Courier New">Sou Funcionário</h5>
+                            <p class="card-text">Ao clicar neste botão, será redirecionado a página de cadastro onde deverá preencher com suas informações pessoais.</p>
+                            <p class="card-text d-grid gap-2"><a class="btn btn-outline-danger" href="@Url.Action("CadastrarFuncionario", "Cadastro")">Ser Funcionário</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

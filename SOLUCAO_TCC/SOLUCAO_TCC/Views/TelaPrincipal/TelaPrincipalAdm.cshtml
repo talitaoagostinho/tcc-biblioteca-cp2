@@ -1,0 +1,111 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body style="background-color: #E0dddd ">
+    <nav class="navbar fixed-top border border-secondary border-3" style="background-color: #2b7ead">
+        <div class="container-md">
+            <a class="navbar-brand">
+                <img src="~/Content/imgfixa/cp2logo.png" alt="Logo" width="200" height="150" class="d-inline-block align-text-top">
+            </a>
+            <span class="navbar-text fs-1 p-3 bg-info bg-opacity-10 border border-info rounded-end rounded-start" style="font-family:fantasy">BIBLIOTECA DO COLÉGIO PEDRO II - EN II</span>
+            <button class="navbar-toggler border border-info bg-opacity-10" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar" style="height: 100px; width: 100px">
+                <span class="navbar-toggler-icon" style="height: 80px; width: 80px"></span>
+            </button>
+            <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
+                <div class="offcanvas-header">
+                    <h5 class="offcanvas-title" id="offcanvasDarkNavbarLabel">Conta do Admin</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                </div>
+                <div class="offcanvas-body">
+                    <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                        
+                        <li class="nav-item ">
+                            @if (Request.IsAuthenticated)
+                            {
+                                using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+                                {
+                                    @Html.AntiForgeryToken()
+                                    <li>
+                            @Html.ActionLink("Gerenciar Conta⚙", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage", @class = " btn btn-primary d-grid gap-2" })
+                                    </li>
+                                        <li>----------------------------------------------------</li>
+                                
+                                         <li class="nav-item d-grid gap-2">
+                                         <a class="btn btn-danger" href="javascript:document.getElementById('logoutForm').submit()">Fazer Logoff <i class="bi bi-box-arrow-left"></i></a>
+                                        </li>
+                            }
+                        }
+                        else
+                        {
+                            
+                        }
+                            
+                        </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+</body>
+</html>
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-4 text-center">
+            <div class="card border-primary mb-3 text-center">
+                <div class="card-header">
+                    Usuários
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">Gerenciar Usuários</h5>
+                    <p class="card-text" style="font-size:40px">👩‍🎓</p>
+                    <a class="btn btn-outline-secondary d-grid gap-2" href="@Url.Action("GerenciarAluno", "Admin")">Gerenciar Usuários</a>
+                </div>
+                <div class="card-footer text-muted">
+                    Função Exclusiva para Administrador
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 text-center">
+            <div class="card border-primary mb-3 text-center">
+                <div class="card-header">
+                    Obras
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">Gerenciar Obras</h5>
+                    <p class="card-text" style="font-size:40px">📚</p>
+                    <a class="btn btn-outline-secondary d-grid gap-2" href="@Url.Action("GerenciarObra", "Admin")">Gerenciar Obras</a>
+                </div>
+                <div class="card-footer text-muted">
+                    Função Exclusiva para Administrador
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 text-center ">
+            <div class="card border-primary mb-3 text-center">
+                <div class="card-header">
+                    Empréstimos
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">Gerenciar Empréstimos</h5>
+                    <p class="card-text" style="font-size:40px">🔃</p>
+                    <a class="btn btn-outline-secondary d-grid gap-2" href="@Url.Action("GerenciarEmprestimo", "Admin")">Gerenciar Empréstimos</a>
+                </div>
+                <div class="card-footer text-muted">
+                    Função Exclusiva para Administrador
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

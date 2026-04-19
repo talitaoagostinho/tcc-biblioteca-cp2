@@ -1,0 +1,162 @@
+﻿@model SOLUCAO_TCC.Models.Viewmodels.SelectViewModel
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body style="background-color: lightsteelblue ">
+</body>
+</html>
+
+
+<div class="row">
+    <div class="col-6">
+        <a class="btn btn-dark btn-lg d-grid gap-2" href="@Url.Action("CadastrarObras", "Admin")">Cadastrar Novas Obras</a>
+    </div>
+    <div class="col-6">
+        <a class="btn btn-warning d-grid gap-2 btn-lg" href="@Url.Action("TelaPrincipalAdm", "TelaPrincipal")">Voltar para tela principal</a>
+    </div>
+</div>
+<br />
+
+
+<table class="table table-primary table-bordered table-hover table-striped border border-dark">
+    <tr>
+        <th class="text-center">
+            Nome
+        </th>
+        <th class="text-center">
+            Autor
+        </th>
+        <th class="text-center">
+            Gênero
+        </th>
+        <th class="text-center">
+            Tipo de Obra
+        </th>
+        <th class="text-center">
+            Quantidadade<br /> Disponível
+        </th>
+        <th class="text-center">
+            Localização<br /> na Biblioteca
+        </th>
+        <th class="text-center">
+            Formato<br /> Digital
+        </th>
+        <th class="text-center">
+
+        </th>
+    </tr>
+
+    @for (int i = 0; i < Model.Obra.Count(); i++)
+    {
+        <tr>
+            <td class="text-center">
+                @Model.Obra[i].Nome
+            </td>
+            <td class="text-center">
+                @Model.Obra[i].Autor
+            </td>
+            <td class="text-center">
+                @Model.Obra[i].Genero
+            </td>
+            <td class="text-center">
+                @Model.Obra[i].Tipo
+            </td>
+            <td class="text-center">
+                @Model.Obra[i].Quantidade
+            </td>
+            <td class="text-center">
+                @Model.Obra[i].Localizacao
+            </td>
+            <td class="text-center">
+                @Model.Obra[i].Pdf
+            </td>
+            <td class="text-center">
+                <div class="row">
+                    <div class="col-6">
+                        <a class="edit btn btn-primary btn-sm" data-id="@Model.Obra[i].Cod_Obra" href="#"><i class="bi bi-pencil-fill"></i> Editar</a>
+                    </div>
+                    <div class="col-6">
+                        <a class="delete btn btn-danger btn-sm" data-id="@Model.Obra[i].Cod_Obra" href="#"><i class="bi bi-trash-fill"></i> Delete</a>
+                    </div>
+                </div>
+                <div class="modal fade" id="Modal" tabindex="-1"></div>
+            </td>
+        </tr>
+    }
+</table>
+@section scripts {
+    <script>
+                    $(document).ready(function ()
+                    {
+                        $('.edit').click(function ()
+                        {
+                                var x = $(this).data("id");
+                                 $.ajax
+                            ({
+                                type: 'GET',
+                                url: '@Url.Action("EditObra", "Admin")/' + x,
+                                dataType: 'html',
+                                cache: false,
+                                success: function (data) {
+                                    $('#Modal').html(data);
+                                    $('#Modal').modal("show");
+                                },
+                                error: function () {
+                                    console.log("Erro");
+                                },
+                                complete: function () {
+                                    $("form").each(function () { $.data($(this)[0], 'validator', false); });
+                                    $.validator.unobtrusive.parse("form");
+                                }
+                            });
+                        });
+
+
+
+                        $('.delete').click(function ()
+                        {
+                                var x = $(this).data("id");
+                                 $.ajax
+                            ({
+                                type: 'GET',
+                                url: '@Url.Action("DeleteObra", "Admin")/' + x,
+                                dataType: 'html',
+                                cache: false,
+                                success: function (data) {
+                                    $('#Modal').html(data);
+                                    $('#Modal').modal("show");
+                                },
+                                error: function () {
+                                    console.log("Erro");
+                                },
+                                complete: function () {
+                                    $("form").each(function () { $.data($(this)[0], 'validator', false); });
+                                    $.validator.unobtrusive.parse("form");
+                                }
+                            });
+                        });
+                    })
+        function exibir() {
+            if ($("#Pdf").is(":checked")) {
+                $("#linkform").removeClass("d-none");
+            }
+            if (!$("#Pdf").is(":checked")) {
+                $("#linkform").addClass("d-none");
+            }
+        }
+    </script>
+
+
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+
+
+
+
+

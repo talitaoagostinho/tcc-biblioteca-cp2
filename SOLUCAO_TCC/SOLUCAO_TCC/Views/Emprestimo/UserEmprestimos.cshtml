@@ -1,0 +1,70 @@
+﻿@model SOLUCAO_TCC.Models.Viewmodels.SelectViewModel
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body style="background-color: lightsteelblue ">
+</body>
+</html>
+
+
+<div class="row">
+    <div class="col-12">
+        <a class="btn btn-warning d-grid gap-2 btn-lg" href="@Url.Action("TelaPrincipalUser", "TelaPrincipal")">Voltar para tela principal</a>
+    </div>
+</div>
+<br />
+
+<table class="table table-secondary table-bordered table-hover table-striped border border-dark">
+    <tr>
+        <th class="text-center">
+            <h4>Nome <br />da Obra</h4>
+        </th>
+        <th class="text-center">
+            <h4>Data de Requisito <br /> do Empréstimo</h4>
+        </th>
+        <th class="text-center">
+            <h4>Data Final<br /> do Empréstimo</h4>
+        </th>
+        <th class="text-center">
+            <h4>Status</h4>
+        </th>
+    </tr>
+    @for (int i = 0; i < Model.Emprestimos.Count(); i++)
+    {
+        <tr>
+            <th class="text-center">
+                @Model.Obra[i].Nome
+            </th>
+            <th class="text-center">
+                @Model.Emprestimos[i].DataInicio.ToShortDateString()
+            </th>
+            <th class="text-center">
+                @Model.Emprestimos[i].DataFim.ToShortDateString()
+            </th>
+            <th class="text-center">
+                @if (Model.Emprestimos[i].Status == 0)
+                {
+                    <p>Pendente</p>
+                }
+                else if (Model.Emprestimos[i].Status == 1)
+                {
+                    <p>Aceito</p>
+                }
+                else if (Model.Emprestimos[i].Status == 2)
+                {
+                    <p>Negado</p>
+                }
+                else if (Model.Emprestimos[i].Status == 3)
+                {
+                    <p>Concluido</p>
+                }
+            </th>
+        </tr>
+    }
+
+</table>

@@ -1,0 +1,129 @@
+﻿@model SOLUCAO_TCC.Models.Viewmodels.SelectViewModel
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body style="background-color: lightsteelblue ">
+</body>
+</html>
+
+
+<div class="row">
+    <div class="col-6">
+        <a class="btn btn-dark d-grid gap-2 btn-lg" href="@Url.Action("GerenciarEmprestimo", "Admin")">Voltar</a>
+    </div>
+    <div class="col-6">
+        <a class="btn btn-warning d-grid gap-2 btn-lg" href="@Url.Action("TelaPrincipalAdm", "TelaPrincipal")">Voltar para tela principal</a>
+    </div>
+</div>
+<br />
+
+<table class="table table-secondary table-bordered table-hover table-striped border border-dark">
+    <tr>
+        <th class="text-center">
+            Pessoa
+        </th>
+        <th class="text-center">
+            Matrícula
+        </th>
+        <th class="text-center">
+            Nome
+        </th>
+        <th class="text-center">
+            Sobrenome
+        </th>
+        <th class="text-center">
+            Email
+        </th>
+        <th class="text-center">
+            Turma/Função
+        </th>
+        <th class="text-center">
+            <small>Data inicial<br />do Empréstimo</small>
+        </th>
+        <th class="text-center">
+            <small> Data final<br />do Empréstimo</small>
+        </th>
+        <th class="text-center">
+            Livro
+        </th>
+        <th class="text-center">
+
+        </th>
+    </tr>
+    @for (int i = 0; i < Model.Emprestimos.Count(); i++)
+
+    {
+
+        SOLUCAO_TCC.Models.Aluno aluno = Model.Aluno.Where(e => e.Cod_Aluno == Model.Emprestimos[i].Id).ToList().FirstOrDefault();
+        SOLUCAO_TCC.Models.Funcionario funcionario = Model.Funcionario.Where(e => e.Cod_Funcionario == Model.Emprestimos[i].Id).ToList().FirstOrDefault();
+        SOLUCAO_TCC.Models.Pessoa pessoa = Model.Pessoa.Where(e => e.Cod_Pessoa == Model.Emprestimos[i].Id).ToList().FirstOrDefault();
+
+        <tr>
+            <td class="text-center">
+                @if (aluno != null && funcionario == null)
+                {
+                    <p>Aluno</p>
+                }
+                @if (aluno == null && funcionario != null)
+                {
+                    <p>Funcionário</p>
+                }
+            </td>
+            <td class="text-center">
+                @if (aluno != null && funcionario == null)
+                {
+                    @aluno.Matricula
+                }
+                @if (aluno == null && funcionario != null)
+                {
+                    @funcionario.Matricula
+                }
+            </td>
+            <td class="text-center">
+                @Model.Pessoa[i].Nome
+            </td>
+            <td class="text-center">
+                @Model.Pessoa[i].Sobrenome
+            </td>
+            <td class="text-center">
+                @Model.Pessoa[i].Email
+            </td>
+            <td class="text-center">
+                @if (aluno != null && funcionario == null)
+                {
+                    @aluno.Turma
+                }
+                @if (aluno == null && funcionario != null)
+                {
+                    @funcionario.Funcao
+                }
+            </td>
+            <td class="text-center">
+                @Model.Emprestimos[i].DataInicio.ToShortDateString()
+            </td>
+            <td class="text-center">
+                @Model.Emprestimos[i].DataFim.ToShortDateString()
+            </td>
+            <td class="text-center">
+                @Model.Obra[i].Nome
+            </td>
+            <td class="text-center">
+                @using (Html.BeginForm("AprovarEmprestimos", "Admin", FormMethod.Post))
+                {
+                    <input type="hidden" value="@Model.Emprestimos[i].Cod_Emprestimo" name="Cod_Emprestimo" />
+                    <button class="btn btn-outline-success" value="1" name="Operacao"><i class="bi bi-journal-plus"></i></button>
+                    <button class="btn btn-outline-danger" value="2" name="Operacao"><i class="bi bi-journal-minus"></i></button>
+                }
+
+
+            </td>
+        </tr>
+    }
+
+</table>
+

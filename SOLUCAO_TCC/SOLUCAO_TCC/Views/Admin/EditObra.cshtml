@@ -1,0 +1,130 @@
+﻿@model SOLUCAO_TCC.Models.Obra
+
+
+<div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h1 class="modal-title fs-5">Editar Obra</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+
+        @using (Html.BeginForm("EditObra", "Admin", FormMethod.Post, new
+        {
+            enctype = "multipart/form-data"
+        }))
+        {
+            @Html.AntiForgeryToken()
+
+            @Html.HiddenFor(model => model.Cod_Obra)
+
+
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            <div class="modal-body pt-0">
+                <h5 class="mt-3" style="padding-right:400px">Nome:</h5>
+
+                @Html.EditorFor(model => model.Nome, new { htmlAttributes = new { @class = "form-control d-flex justify-content-center" } })
+                @Html.ValidationMessageFor(model => model.Nome, "", new { @class = "text-danger" })
+
+
+
+
+                <h5 class="mt-3" style="padding-right:400px">Autor:</h5>
+
+                @Html.EditorFor(model => model.Autor, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Autor, "", new { @class = "text-danger" })
+
+
+
+                <h5 class="mt-3" style="padding-right:400px">Gênero:</h5>
+                <div class="" style="padding-right:500px">
+                    <select id="Genero" name="Genero" style="">
+
+                        <option value="Romance" @if (Model.Genero == "Romance") { <text> selected</text>}>Romance</option>
+                        <option value="Terror" @if (Model.Genero == "Terror") { <text> selected</text>}>Terror</option>
+                        <option value="Ficção Científica" @if (Model.Genero == "Ficção Científica") { <text> selected</text>}>Ficção Científica</option>
+                        <option value="Fantasia" @if (Model.Genero == "Fantasia") { <text> selected</text>}>Fantasia</option>
+                        <option value="Drama" @if (Model.Genero == "Drama") { <text> selected</text>}>Drama</option>
+                        <option value="Autoajuda" @if (Model.Genero == "Autoajuda") { <text> selected</text>}>Autoajuda</option>
+                        <option value="Biografia" @if (Model.Genero == "Biografia") { <text> selected</text>}>Biografia</option>
+                        <option value="Infantil" @if (Model.Genero == "Infantil") { <text> selected</text>}>Infantil</option>
+                        <option value="Matemática" @if (Model.Genero == "Matemática") { <text> selected</text>}>Matemática</option>
+                        <option value="Português" @if (Model.Genero == "Português") { <text> selected</text>}>Português</option>
+                        <option value="Biologia" @if (Model.Genero == "Biologia") { <text> selected</text>}>Biologia</option>
+                        <option value="Física" @if (Model.Genero == "Física") { <text> selected</text>}>Física</option>
+                        <option value="Química" @if (Model.Genero == "Química") { <text> selected</text>}>Química</option>
+                        <option value="História" @if (Model.Genero == "História") { <text> selected</text>}>História</option>
+                        <option value="Geografia" @if (Model.Genero == "Geografia") { <text> selected</text>}>Geografia</option>
+                        <option value="Desenho" @if (Model.Genero == "Desenho") { <text> selected</text>}>Desenho</option>
+                        <option value="Filosofia" @if (Model.Genero == "Filosofia") { <text> selected</text>}>Filosofia</option>
+                        <option value="Sociologia" @if (Model.Genero == "Sociologia") { <text> selected</text>}>Sociologia</option>
+                        <option value="Programação" @if (Model.Genero == "Programação") { <text> selected</text>}>Programação</option>
+
+                    </select>
+                    @Html.ValidationMessageFor(model => model.Genero, "", new { @class = "text-danger" })
+                </div>
+
+
+                <h5 class="mt-3" style="padding-right:400px">Quantidade:</h5>
+                @Html.EditorFor(model => model.Quantidade, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Quantidade, "", new { @class = "text-danger" })
+
+                <h5 class="mt-3" style="padding-right:400px">Localização:</h5>
+                @Html.EditorFor(model => model.Localizacao, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Localizacao, "", new { @class = "text-danger" })
+
+
+                <h5 class="mt-3" style="padding-right:500px">PDF:</h5>
+                <div class="checkbox" style="padding-right: 500px">
+                    @Html.CheckBoxFor(model => model.Pdf, new { onchange = "exibir()" } )
+                    @Html.ValidationMessageFor(model => model.Pdf, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="form-group d-none" id="linkform">
+                    <h5 class="" style="padding-right:400px">Link do PDF:</h5>
+                    <input id="link" name="link" type="file" accept=".pdf" style="padding-right:500px"> 
+                </div>
+
+
+
+                <h5 class="mt-3" style="padding-right:500px">Tipo:</h5>
+                <div class="" style="padding-right:500px">
+                    <select id="Tipo" name="Tipo">
+                        <option value="Livro"@if(Model.Tipo == "Livro") { <text>selected</text>}>Livro de Entretenimento</option>
+                        <option value="Apostila"@if(Model.Tipo == "Apostila") { <text>selected</text>}>Apostila de Exercícios</option>
+                        <option value="Acadêmico"@if(Model.Tipo == "Acadêmico") { <text>selected</text>}>Livro Acadêmico</option>
+                        <option value="Infantojuvenil"@if(Model.Tipo == "Infantojuvenil") { <text>selected</text>}>Infantojuvenil</option>
+                        <option value="HQ"@if(Model.Tipo == "HQ") { <text>selected</text>}>HQ</option>
+                        <option value="Mangá"@if(Model.Tipo == "Mangá") { <text>selected</text>}>Mangá</option>
+                    </select>
+                    @Html.ValidationMessageFor(model => model.Tipo, "", new { @class = "text-danger" })
+                </div>
+                <h5 class="mt-3" style="padding-right:400px">Detalhes:</h5>
+                <div style="padding-right:500px">
+                    <textarea id="Detalhes" name="Detalhes" rows="10" cols="50">@Model.Detalhes</textarea>
+                    @Html.ValidationMessageFor(model => model.Detalhes, "", new { @class = "text-danger" })
+                </div>
+
+                <h5 class="mt-3" style="padding-right:400px">Imagem:</h5>
+                <input style="padding-right:500px" id="img" name="img" type="file" accept="image/*">
+                @Html.ValidationMessageFor(model => model.Imagem, "", new { @class = "text-danger" })
+
+
+
+            <div class="mt-4 d-grid gap-2">
+                <button class="btn btn-success">Confirmar <i class="bi bi-check-circle-fill"></i></button>
+            </div>
+
+            </div>
+
+
+
+        }
+    </div>
+    </div>
+
+
+
+    @section scripts{
+    @Scripts.Render("~/bundles/jqueryval")
+}

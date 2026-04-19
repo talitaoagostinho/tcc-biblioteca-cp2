@@ -1,0 +1,26 @@
+﻿@model SOLUCAO_TCC.Models.Emprestimos
+
+<div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h1 class="modal-title fs-5">Certeza que esta Obra foi devolvida?</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+            <div class="modal-body" >
+                <h4>Dia devolvido: @DateTime.Today.ToShortDateString()</h4>
+            </div>
+            <div class="modal-footer">
+                @using (Html.BeginForm("Devolver", "Admin", FormMethod.Post))
+                {
+                    @Html.HiddenFor(model => model.Cod_Emprestimo)
+
+                    <div class="d-grid gap-2">
+                        <button class="btn btn-success">Confirmar <i class="bi bi-check-circle-fill"></i></button>
+                    </div>
+                }
+
+
+
+            </div>
+    </div>
+</div>

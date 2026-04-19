@@ -1,0 +1,100 @@
+﻿@using SOLUCAO_TCC.Models
+@model LoginViewModel
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body style="background-color: #E0dddd ">
+    <nav class="navbar fixed-top border border-secondary border-3" style="background-color: #2b7ead">
+        <div class="container-md">
+            <a class="navbar-brand">
+                <img src="~/Content/imgfixa/cp2logo.png" alt="Logo" width="200" height="150" class="d-inline-block align-text-top">
+            </a>
+            <span class="navbar-text fs-1 p-3 bg-info bg-opacity-10 border border-info rounded-end rounded-start" style="font-family:fantasy">BIBLIOTECA DO COLÉGIO PEDRO II - EN II</span>
+            <button class="navbar-toggler border border-info bg-opacity-10" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar" style="height: 100px; width: 100px">
+                <span class="navbar-toggler-icon" style="height: 80px; width: 80px"></span>
+            </button>
+            <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
+                <div class="offcanvas-header">
+                    <h5 class="offcanvas-title" id="offcanvasDarkNavbarLabel">Seja Bem-Vindo!</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                </div>
+                <div class="offcanvas-body">
+                    <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                        Crie uma Conta para Utilizar o Site
+                        <li class="nav-item d-grid gap-2">
+                            <a class="btn btn-primary btn-lg" href="@Url.Action("Register", "Account")">Registre-se <i class="bi bi-box-arrow-in-right"></i></a>
+                        </li>
+                        <li>----------------------------------------------------</li>
+                        Voltar Para o Menu Inicial
+                        <li class="nav-item d-grid gap-2">
+                            <a class="btn btn-outline-info btn-lg" href="@Url.Action("TelaInicial", "Home")">Menu <i class="bi bi-box-arrow-in-left"></i></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <br />
+    <br />
+    <br />
+         <br />
+
+    <h2>@ViewBag.Title.</h2>
+    <div class="row">
+        <div class="col-md-8">
+            <section id="loginForm">
+                @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { role = "form" }))
+                {
+                    @Html.AntiForgeryToken()
+             
+                    <h2 style="padding-top:0px; padding-left:533px; font-family:sans-serif">Faça seu Login:</h2>
+     
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+                <div style="padding-left:500px">
+                    <div class="card border-info mb-3" style="max-width: 18rem;">
+                        <div class="card-header text-center"><i class="bi bi-envelope-at-fill"></i> Email:</div>
+                        <div class="card-body">
+                            <p class="card-text">
+                                @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @placeholder = "Digite aqui seu Email:" })
+                                @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                            </p>
+                        </div>
+                    </div>
+                    <div class="card border-info mb-3" style="max-width: 18rem;">
+                        <div class="card-header text-center">Senha:</div>
+                        <div class="card-body">
+                            <p class="card-text">
+                                @Html.PasswordFor(m => m.Password, new { @class = "form-control", @placeholder = "Digite aqui sua Senha:" })
+                                @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                            </p>
+                        </div>
+                    </div>
+                    <div class="card border-info mb-3" style="max-width: 18rem;">
+                        <div class="card-header text-center">Confirmar:</div>
+                        <div class="card-body">
+                            <p class="card-text text-center d-grid gap-2">
+                                <input type="submit" value="Login" class="btn btn-secondary"  />
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                                     
+
+                                }
+                </section>
+        </div>
+    </div>
+</body>
+    </html>
+
+
+    @section Scripts {
+
+        @Scripts.Render("~/bundles/jqueryval")
+    }

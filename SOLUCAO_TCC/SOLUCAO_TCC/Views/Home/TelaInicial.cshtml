@@ -1,0 +1,58 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body style="background-color: #E0dddd ">
+    <nav class="navbar fixed-top border border-secondary border-3" style="background-color: #2b7ead">
+        <div class="container-md">
+            <a class="navbar-brand">
+                <img src="~/Content/imgfixa/cp2logo.png" alt="Logo" width="200" height="150" class="d-inline-block align-text-top">
+            </a>
+            <span class="navbar-text fs-1 p-3 bg-info bg-opacity-10 border border-info rounded-end rounded-start" style="font-family:fantasy">BIBLIOTECA DO COLÉGIO PEDRO II - EN II</span>
+            <button class="navbar-toggler border border-info bg-opacity-10" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar" style="height: 100px; width: 100px">
+                <span class="navbar-toggler-icon" style="height: 80px; width: 80px"></span>
+            </button>
+            <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
+                <div class="offcanvas-header">
+                    <h5 class="offcanvas-title" id="offcanvasDarkNavbarLabel">Seja Bem-Vindo!</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                </div>
+                <div class="offcanvas-body">
+                    <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                        Crie uma Conta para Utilizar o Site
+                        <li class="nav-item d-grid gap-2">
+                            <a class="btn btn-primary btn-lg" href="@Url.Action("Register", "Account")">Registre-se <i class="bi bi-box-arrow-in-right"></i></a>
+                        </li>
+                        <li>----------------------------------------------------</li>
+                        Já tem uma conta? Faça o Login
+                        <li class="nav-item d-grid gap-2">
+                            <a class="btn btn-secondary btn-lg" href="@Url.Action("Login", "Account")">Login <i class="bi bi-box-arrow-in-right"></i></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <div class="row">
+        <div class="col-6 text-center" style="margin-top: 140px">
+            <img src="~/Content/imgfixa/frente.jpg" alt="frente" class="border border-dark rounded-end rounded-start" width="600" height="430">
+        </div>
+        <div class="col-6 text-center">
+            <p class="h1" style="padding-top:200px; font-family:fantasy">
+                OLÁ, SEJA BEM-VINDO À BIBLIOTECA DO CP2
+                CAMPUS ENGENHO NOVO II!
+            </p>
+            <p class="" style="font-family:Arial; font-size:30px">
+                Aqui você irá encontrar todas as obras disponíveis em nosso acervo,
+                podendo solicitar empréstimos e/ou visualizá-las virtualmente.
+                Faça seu login ou crie sua conta para iniciar suas leituras!
+            </p>
+        </div>
+    </div>
+    
+</body>
+
+</html>

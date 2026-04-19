@@ -1,0 +1,60 @@
+﻿@model SOLUCAO_TCC.Models.Obra
+@{
+    string url = "";
+
+    if (Model.Pdf_Link != null && Model.Pdf_Link != "")
+    {
+        string[] jorge = Model.Pdf_Link.Split(new string[] { ".." }, StringSplitOptions.None);
+        url = jorge[2];
+    }
+
+}
+
+<div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h1 class="modal-title fs-5">@Model.Nome</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+
+        <div class="modal-body" style="min-height:300px">
+            <p>@Model.Detalhes</p>
+        </div>
+
+        <div class="modal-footer">
+
+
+            @if (Model.Pdf_Link != null && Model.Pdf_Link != "")
+            {
+                <a class="btn btn-success" href="@url">Visualizar Obra Digital</a>
+            }
+            @if (Model.Pdf_Link == null || Model.Pdf_Link == "")
+            {
+                <a class="btn btn-success disabled" href="@url">Visualizar Obra Digital</a>
+            }
+            @if (Model.Quantidade != 0)
+            {
+                <a class="select2 btn btn-warning" data-id="@Model.Cod_Obra">Pedir Empréstimo da Obra</a>
+            }
+            @if (Model.Quantidade == 0)
+            {
+                <a class="btn btn-warning disabled" data-id="@Model.Cod_Obra">Pedir Empréstimo da Obra</a>
+            }
+
+
+        </div>
+    </div>
+</div>
+
+
+@section scripts {
+    <script>
+                    $(document).ready(function ()
+                    {
+                        
+                    })
+    </script>
+
+
+    @Scripts.Render("~/bundles/jqueryval")
+}

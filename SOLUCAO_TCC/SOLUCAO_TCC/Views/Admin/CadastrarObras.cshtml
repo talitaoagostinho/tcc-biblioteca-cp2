@@ -1,0 +1,175 @@
+﻿@model SOLUCAO_TCC.Models.Viewmodels.CadastroViewModel
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body style="background-color: honeydew ">
+</body>
+</html>
+
+
+<div class="row">
+    <div class="col-6">
+        <a class="btn btn-dark d-grid gap-2 btn-lg" href="@Url.Action("GerenciarObra", "Admin")">Voltar</a>
+    </div>
+    <div class="col-6">
+        <a class="btn btn-warning d-grid gap-2 btn-lg" href="@Url.Action("TelaPrincipalAdm", "TelaPrincipal")">Voltar para tela principal</a>
+    </div>
+</div>
+<br />
+<hr />
+
+@using (Html.BeginForm("CadastrarObras", "Admin", FormMethod.Post, new
+{
+    enctype = "multipart/form-data"
+}))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.Obra.Nome, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Obra.Nome, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Obra.Nome, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Obra.Autor, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Obra.Autor, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Obra.Autor, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Obra.Genero, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <select id="Obra_Genero" name="Obra.Genero">
+                    <option value="Romance">Romance</option>
+                    <option value="Terror">Terror</option>
+                    <option value="Ficção Científica">Ficção Científica</option>
+                    <option value="Fantasia">Fantasia</option>
+                    <option value="Drama">Drama</option>
+                    <option value="Autoajuda">Autoajuda</option>
+                    <option value="Biografia">Biografia</option>
+                    <option value="Matemática">Matemática</option>
+                    <option value="Português">Português</option>
+                    <option value="Biologia">Biologia</option>
+                    <option value="Física">Física</option>
+                    <option value="Química">Química</option>
+                    <option value="História">História</option>
+                    <option value="Geografia">Geografia</option>
+                    <option value="Desenho">Desenho</option>
+                    <option value="Filosofia">Filosofia</option>
+                    <option value="Sociologia">Sociologia</option>
+                    <option value="Programação">Programação</option>
+                    <option value="Infantil">Infantil</option>
+                </select>
+                @Html.ValidationMessageFor(model => model.Obra.Genero, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Obra.Quantidade, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Obra.Quantidade, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Obra.Quantidade, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Obra.Localizacao, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Obra.Localizacao, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Obra.Localizacao, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Obra.Pdf, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <div class="checkbox">
+                    <input type="checkbox" id="Obra_Pdf" name="Obra.Pdf" onchange="exibir()" />
+                    @Html.ValidationMessageFor(model => model.Obra.Pdf, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group d-none" id="linkform">
+            @Html.LabelFor(model => model.Obra.Pdf_Link, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <input id="link" name="link" type="file" accept=".pdf">
+                @Html.ValidationMessageFor(model => model.Obra.Pdf_Link, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Obra.Tipo, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <select id="Obra_Tipo" name="Obra.Tipo">
+                    <option value="Livro">Livro de Entretenimento</option>
+                    <option value="Apostila">Apostila de Exercícios</option>
+                    <option value="Acadêmico">Livro Acadêmico</option>
+                    <option value="Infantojuvenil">Infantojuvenil</option>
+                    <option value="HQ">HQ</option>
+                    <option value="Mangá">Mangá</option>
+                </select>
+                @Html.ValidationMessageFor(model => model.Obra.Tipo, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Obra.Detalhes, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <textarea id="Obra_Detalhes" name="Obra.Detalhes" rows="7" cols="50"></textarea>
+                @Html.ValidationMessageFor(model => model.Obra.Detalhes, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Obra.Imagem, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <input id="img" name="img" type="file" accept="image/*">
+                @Html.ValidationMessageFor(model => model.Obra.Imagem, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <br />
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-success d-grid gap-2  " />
+            </div>
+        </div>
+    </div>
+
+
+
+}
+
+@section scripts{
+    <script>
+        function exibir() {
+            if ($("#Obra_Pdf").is(":checked")) {
+                $("#linkform").removeClass("d-none");
+            }
+            if (!$("#Obra_Pdf").is(":checked")) {
+                $("#linkform").addClass("d-none");
+            }
+        }
+
+    </script>
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+
+
+

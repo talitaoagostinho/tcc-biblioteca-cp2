@@ -1,0 +1,162 @@
+﻿@model SOLUCAO_TCC.Models.Viewmodels.SelectViewModel
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body style="background-color: lightsteelblue ">
+</body>
+</html>
+
+
+<div class="row">
+    <div class="col-6">
+        <a class="btn btn-dark d-grid gap-2 btn-lg" href="@Url.Action("AprovarUsers", "Admin")">Visualizar Contas a Serem Aprovadas</a>
+    </div>
+    <div class="col-6">
+        <a class="btn btn-warning d-grid gap-2 btn-lg" href="@Url.Action("TelaPrincipalAdm", "TelaPrincipal")">Voltar para tela principal</a>
+    </div>
+</div>
+<br />
+
+<table class="table table-secondary table-bordered table-hover table-striped border border-dark">
+    <tr>
+        <th class="text-center">
+            Pessoa
+        </th>
+        <th class="text-center">
+            Email
+        </th>
+        <th class="text-center">
+            Matrícula
+        </th>
+        <th class="text-center">
+            Nome
+        </th>
+        <th class="text-center">
+            Sobrenome
+        </th>
+        <th class="text-center">
+            Turma/Função
+        </th>
+        <th class="text-center">
+            Nascimento
+        </th>
+        <th class="text-center">
+            Sexo
+        </th>
+        <th class="text-center">
+            Celular
+        </th>
+        <th class="text-center">
+
+        </th>
+    </tr>
+
+    @for (int i = 0; i < Model.Pessoa.Count(); i++)
+    {
+
+        var Aluno = Model.Aluno.Where(e => e.Cod_Aluno == Model.Pessoa[i].Cod_Pessoa).SingleOrDefault();
+        var Funcionario = Model.Funcionario.Where(e => e.Cod_Funcionario == Model.Pessoa[i].Cod_Pessoa).SingleOrDefault();
+
+
+        <tr>
+            <td class="text-center">
+                @if (Aluno != null)
+                {
+                    <p>Aluno</p>
+                }
+                else
+                {
+                    <p>Funcionário</p>
+                }
+            </td>
+            <td class="text-center">
+                @Model.Pessoa[i].Email
+            </td>
+            <td class="text-center">
+                @if (Aluno != null)
+                {
+                    @Aluno.Matricula
+                }
+                else if (Funcionario != null)
+                {
+                    @Funcionario.Matricula
+                }
+            </td>
+            <td class="text-center">
+                @Model.Pessoa[i].Nome
+            </td>
+            <td class="text-center">
+                @Model.Pessoa[i].Sobrenome
+            </td>
+            <td class="text-center">
+                @if (Aluno != null)
+                {
+                    @Aluno.Turma
+                }
+                else if (Funcionario != null)
+                {
+                    @Funcionario.Funcao
+                }
+            </td>
+            <td class="text-center">
+                @Model.Pessoa[i].Nascimento.ToShortDateString()
+            </td>
+            <td class="text-center">
+                @Model.Pessoa[i].Sexo
+            </td>
+            <td class="text-center">
+                @Model.Pessoa[i].Celular
+            </td>
+            <td class="text-center">
+                <a class="edit btn btn-primary" data-id="@Model.Pessoa[i].Cod_Pessoa" href="#"><i class="bi bi-pencil-fill"></i> Editar</a>
+
+                <div class="modal fade" id="Modal" tabindex="-1"></div>
+            </td>
+        </tr>
+    }
+
+</table>
+
+@section scripts {
+    <script>
+                    $(document).ready(function ()
+                    {
+                        $('.edit').click(function ()
+                        {
+                            var x = $(this).data("id");
+                            console.log(x);
+                            $.ajax
+                            ({
+                                type: 'GET',
+                                url: '@Url.Action("EditPessoa", "Admin")?Cod_Pessoa=' + x,
+                                dataType: 'html',
+                                cache: false,
+                                success: function (data) {
+                                    $('#Modal').html(data);
+                                    $('#Modal').modal("show");
+                                },
+                                error: function () {
+                                    console.log("Erro");
+                                },
+                                complete: function () {
+                                    $("form").each(function () { $.data($(this)[0], 'validator', false); });
+                                    $.validator.unobtrusive.parse("form");
+                                }
+                            });
+                        });
+                     
+                    })
+
+    </script>
+
+
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+
+

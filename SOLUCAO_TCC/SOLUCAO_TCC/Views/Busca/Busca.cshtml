@@ -1,0 +1,32 @@
+﻿@model SOLUCAO_TCC.Models.Viewmodels.SelectViewModel
+
+<div class="container">
+    <div class="row row-cols-2">
+        @for (int i = 0; i < Model.Obra.Count(); i++)
+        {<div class="col">
+                <div class="card mb-3 border-dark border-2" style="max-width: 509px; max-height: 260px; background-color: #f6d5d8">
+                    <div class="row g-0">
+                        <div class="col-md-4">
+                            <img src="@Model.Obra[i].Imagem" class="img-fluid rounded-start" alt="...">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h5 class="card-header fw-bolder">@Model.Obra[i].Nome</h5>
+                                <p class="card-text">
+                                    <small class="fw-bold">Autor: </small>@Model.Obra[i].Autor<br />
+                                    <small class="fw-bold">Gênero:</small> @Model.Obra[i].Genero<br />
+                                    <small class="fw-bold">Tipo:</small> @Model.Obra[i].Tipo<br />
+                                    <small class="fw-bold">Quantidade Disponivel:</small> @Model.Obra[i].Quantidade<br />
+                                    <small class="fw-bold">Localização na Biblioteca: </small>@Model.Obra[i].Localizacao<br />
+                                <p class="card-text"><a class="select btn btn-dark" data-id="@Model.Obra[i].Cod_Obra">Visualize as informações da Obra <i class="bi bi-eye-fill"></i></a></p>
+                                <input type="hidden" value="@Model.Obra[i].Cod_Obra" name="Cod_Obra" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+

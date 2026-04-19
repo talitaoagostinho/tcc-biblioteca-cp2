@@ -1,0 +1,109 @@
+﻿@model SOLUCAO_TCC.Models.Viewmodels.CadastroViewModel
+
+
+<div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h1 class="modal-title fs-5">Editar Usuário</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+
+        @using (Html.BeginForm("EditPessoa", "Admin", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+
+            @Html.HiddenFor(model => model.Pessoa.Cod_Pessoa)
+            @Html.HiddenFor(model => model.Aluno.Cod_Aluno)
+            @Html.HiddenFor(model => model.Funcionario.Cod_Funcionario)
+            @Html.HiddenFor(model => model.Aluno.Matricula)
+            @Html.HiddenFor(model => model.Funcionario.Matricula)
+            @Html.HiddenFor(model => model.Pessoa.Sexo)
+            @Html.HiddenFor(model => model.Pessoa.Status)
+            @Html.HiddenFor(model => model.Aluno.Status)
+            @Html.HiddenFor(model => model.Funcionario.Status)
+            @Html.HiddenFor(model => model.Pessoa.Nascimento)
+            @Html.HiddenFor(model => model.Pessoa.Email)
+
+
+
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            <div class="modal-body pt-0">
+                <h5 class="mt-3" style="padding-right:400px">Nome:</h5>
+
+                @Html.EditorFor(model => model.Pessoa.Nome, new { htmlAttributes = new { @class = "form-control d-flex justify-content-center" } })
+                @Html.ValidationMessageFor(model => model.Pessoa.Nome, "", new { @class = "text-danger" })
+
+
+
+
+                <h5 class="mt-3" style="padding-right:400px">Sobrenome:</h5>
+
+                @Html.EditorFor(model => model.Pessoa.Sobrenome, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Pessoa.Sobrenome, "", new { @class = "text-danger" })
+
+
+                @if (Model.Aluno != null)
+                {
+                    <h5 class="mt-3" style="padding-right:400px">Turma:</h5>
+                }
+                else if (Model.Funcionario != null)
+                {
+                    <h5 class="mt-3" style="padding-right:400px">Função:</h5>
+                }
+                @if (Model.Aluno != null)
+                {
+                    <select id="Aluno_Turma" name="Aluno.Turma" class="form-select" style="max-width: 100%;">
+                        @foreach (var item in Model.Turmas)
+                        {
+                            <option value="@item.Nome"
+                                    @if (Model.Aluno.Turma == item.Nome) { <text> selected</text>
+                        }>
+                                @item.Nome
+                            </option>
+                        }
+                    </select>
+                }
+                else if (Model.Funcionario != null)
+                {
+                    <select class="form-select" id="Funcionario_Funcao" name="Funcionario.Funcao">
+                        
+                        <option value="Professor"@if(Model.Funcionario.Funcao == "Professor"){ <text>selected</text>}>Professor(a)</option>
+                        <option value="Gestao"@if(Model.Funcionario.Funcao == "Gestao"){ <text>selected</text>}>Gestão</option>
+                        <option value="Coordenacao"@if(Model.Funcionario.Funcao == "Coordenacao"){ <text>selected</text>}>Coordenação Pedagógica</option>
+                        <option value="Multimeio"@if(Model.Funcionario.Funcao == "Multimeio"){ <text>selected</text>}>Profissional de Multimeio</option>
+                        <option value="Secretaria"@if(Model.Funcionario.Funcao == "Secretaria"){ <text>selected</text>}>Secretaria</option>
+                        <option value="Cozinha"@if(Model.Funcionario.Funcao == "Cozinha"){ <text>selected</text>}>Cozinha</option>
+                        <option value="Limpeza"@if(Model.Funcionario.Funcao == "Limpeza"){ <text>selected</text>}>Limpeza</option>
+                        <option value="Vigia"@if(Model.Funcionario.Funcao == "Vigia"){ <text>selected</text>}>Vigia/Porteiro</option>
+                        <option value="Inspetor"@if(Model.Funcionario.Funcao == "Inspetor"){ <text>selected</text>}>Inspetor(a)</option>
+                    </select>
+                }
+
+
+
+                <h5 class="mt-3" style="padding-right:400px">Celular:</h5>
+                @Html.EditorFor(model => model.Pessoa.Celular, new { htmlAttributes = new { @class = "form-control", @maxlength = "11" } })
+                @Html.ValidationMessageFor(model => model.Pessoa.Celular, "", new { @class = "text-danger" })
+
+
+
+
+                <div class="mt-4 d-grid gap-2">
+                    <button class="btn btn-success">Confirmar <i class="bi bi-check-circle-fill"></i></button>
+                </div>
+
+
+
+            </div>
+
+        }
+
+    </div>
+        </div>
+
+    
+
+        @section Scripts {
+            @Scripts.Render("~/bundles/jqueryval")
+        }
