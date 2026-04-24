@@ -524,7 +524,6 @@ FodyWeavers.xsd
 # Força o GitHub a ignorar JS e CSS nas estatísticas de linguagem
 *.js linguist-vendored
 *.css linguist-vendored
-wwwroot/lib/* linguist-vendored
 
 # JetBrains Rider
 
