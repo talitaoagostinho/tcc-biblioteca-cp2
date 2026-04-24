@@ -521,6 +521,10 @@ FodyWeavers.xsd
 *.msm
 *.msp
 
+# Marcar arquivos JavaScript como bibliotecas de terceiros para não contarem na linguagem do repo
+*.js linguist-vendored
+*.css linguist-vendored
+
 # JetBrains Rider
 
 ### VisualStudio Patch ###
