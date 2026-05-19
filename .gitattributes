@@ -1,5 +1,11 @@
+# Ignorar linguagens de Front-end para destacar o Back-end
 *.js linguist-vendored
 *.css linguist-vendored
+*.html linguist-vendored
+*.cshtml linguist-vendored
+
+# Ignorar pastas de bibliotecas e assets
 wwwroot/lib/** linguist-vendored
 Scripts/** linguist-vendored
+
 
